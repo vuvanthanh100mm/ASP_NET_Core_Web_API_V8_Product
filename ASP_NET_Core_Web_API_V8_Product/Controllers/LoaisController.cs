@@ -1,16 +1,15 @@
 ﻿using ASP_NET_Core_Web_API_V8_Product.Data;
-using Microsoft.AspNetCore.Authorization;
+using ASP_NET_Core_Web_API_V8_Product.Models;
 using Microsoft.AspNetCore.Mvc;
-using MyWebApiAppV8_HienLTH.Models;
 
 namespace ASP_NET_Core_Web_API_V8_Product.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LoaiController : ControllerBase
+    public class LoaisController : ControllerBase
     {
         private readonly MyDbContext _context;
-        public LoaiController(MyDbContext context) {
+        public LoaisController(MyDbContext context) {
             _context = context;
         }
 
