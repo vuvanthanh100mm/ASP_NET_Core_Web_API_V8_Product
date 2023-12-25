@@ -1,4 +1,5 @@
 ﻿using ASP_NET_Core_Web_API_V8_Product.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyWebApiAppV8_HienLTH.Models;
 
@@ -14,9 +15,17 @@ namespace ASP_NET_Core_Web_API_V8_Product.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAll() { 
-            var dsLoai = _context.loais.ToList();
-            return Ok(dsLoai);
+        public IActionResult GetAll() {
+            try
+            {
+                var dsLoai = _context.loais.ToList();
+                return Ok(dsLoai);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+            
         }
 
         [HttpGet("{id}")]
@@ -32,7 +41,23 @@ namespace ASP_NET_Core_Web_API_V8_Product.Controllers
             }
         }
 
-        [HttpPost("{id}")]
+        [HttpDelete("{id}")]
+        public IActionResult DeleteLoaiById(int id)
+        {
+            var loai = _context.loais.SingleOrDefault(lo => lo.MaLoai == id);
+            if (loai != null)
+            {
+                _context.Remove(loai);
+                _context.SaveChanges();
+                return StatusCode(StatusCodes.Status200OK);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpPost]
         public IActionResult CreateNew(LoaiModel model)
         {
             try
@@ -42,7 +67,7 @@ namespace ASP_NET_Core_Web_API_V8_Product.Controllers
                 };
                 _context.Add(loai);
                 _context.SaveChanges();
-                return Ok(loai);
+                return StatusCode(StatusCodes.Status201Created, loai);
             } 
             catch (Exception ex)
             {

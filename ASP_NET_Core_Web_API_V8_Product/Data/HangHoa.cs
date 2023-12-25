@@ -22,5 +22,12 @@ namespace ASP_NET_Core_Web_API_V8_Product.Data
 
         [ForeignKey("MaLoai")]
         public Loai Loai { get; set; }
+
+        public ICollection<DonHangChiTiet> DonHangChiTiets { get; set; }
+        public HangHoa()
+        {
+            DonHangChiTiets = new HashSet<DonHangChiTiet>();
+        }
+
     }
 }
