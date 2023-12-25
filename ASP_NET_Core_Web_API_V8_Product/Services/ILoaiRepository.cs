@@ -9,5 +9,6 @@ namespace ASP_NET_Core_Web_API_V8_Product.Services
         LoaiVM Add(LoaiModel loai);
         void Update(LoaiVM loai);
         void Delete(int id);
+        object? GetById(int id);
     }
 }

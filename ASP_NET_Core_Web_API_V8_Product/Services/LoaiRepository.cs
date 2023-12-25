@@ -72,5 +72,10 @@ namespace ASP_NET_Core_Web_API_V8_Product.Services
         {
             throw new NotImplementedException();
         }
+
+        object? ILoaiRepository.GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
